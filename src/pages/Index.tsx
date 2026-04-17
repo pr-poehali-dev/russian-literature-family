@@ -480,7 +480,11 @@ export default function Index() {
             <div
               className="animate-fade-in-up stagger-1 flex items-center gap-3 mb-6"
               style={{ color: "var(--sepia)", fontSize: "0.75rem", letterSpacing: "0.2em", fontFamily: "'Cormorant SC', serif" }}
-            >МЕТОДИЧКА ОГЭ И ЕГЭ</div>
+            >
+              <span style={{ width: 32, height: 1, background: "var(--gold)", display: "inline-block" }} />
+              НАУЧНОЕ ИССЛЕДОВАНИЕ · 2024
+              <span style={{ width: 32, height: 1, background: "var(--gold)", display: "inline-block" }} />
+            </div>
 
             <h1
               className="animate-fade-in-up stagger-2"
