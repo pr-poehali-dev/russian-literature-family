@@ -53,50 +53,248 @@ const WORKS = [
   },
 ];
 
-const FAMILY_COMPARISON = [
-  {
-    criterion: "Социальное положение",
-    bolkonskie: "Высшая аристократия, древний род",
-    rostovy: "Старинное дворянство, открытость",
-    ranevskie: "Разорившееся дворянство",
-    lariny: "Провинциальное дворянство",
+type ComparisonRow = {
+  criterion: string;
+  cells: { family: string; value: string }[];
+};
+
+const WORK_COMPARISONS: Record<string, { families: { name: string; color: string }[]; rows: ComparisonRow[] }> = {
+  voyna: {
+    families: [
+      { name: "Болконские", color: "#7c1c1c" },
+      { name: "Ростовы", color: "#5a3e1b" },
+      { name: "Курагины", color: "#2a4a6b" },
+      { name: "Безуховы", color: "#3d6b2a" },
+    ],
+    rows: [
+      {
+        criterion: "Социальное положение",
+        cells: [
+          { family: "Болконские", value: "Высшая аристократия, древний род" },
+          { family: "Ростовы", value: "Старинное московское дворянство" },
+          { family: "Курагины", value: "Петербургская придворная знать" },
+          { family: "Безуховы", value: "Богатейший граф, незаконнорождённый" },
+        ],
+      },
+      {
+        criterion: "Ценности и идеалы",
+        cells: [
+          { family: "Болконские", value: "Долг, честь, интеллект, гордость" },
+          { family: "Ростовы", value: "Любовь, радость жизни, традиции" },
+          { family: "Курагины", value: "Карьера, деньги, связи, удовольствия" },
+          { family: "Безуховы", value: "Поиск смысла, духовность, любовь" },
+        ],
+      },
+      {
+        criterion: "Отношение к деньгам",
+        cells: [
+          { family: "Болконские", value: "Рациональное, расчётливое" },
+          { family: "Ростовы", value: "Расточительное, щедрое" },
+          { family: "Курагины", value: "Алчное, всё ради выгоды" },
+          { family: "Безуховы", value: "Небрежное — богатство даётся случайно" },
+        ],
+      },
+      {
+        criterion: "Семейные отношения",
+        cells: [
+          { family: "Болконские", value: "Строгие, отдалённые, требовательные" },
+          { family: "Ростовы", value: "Тёплые, близкие, эмоциональные" },
+          { family: "Курагины", value: "Холодные, расчётливые, без любви" },
+          { family: "Безуховы", value: "Поиск настоящей семьи через страдания" },
+        ],
+      },
+      {
+        criterion: "Судьба в произведении",
+        cells: [
+          { family: "Болконские", value: "Трагическая трансформация" },
+          { family: "Ростовы", value: "Разорение и возрождение" },
+          { family: "Курагины", value: "Крах и гибель" },
+          { family: "Безуховы", value: "Духовное перерождение, счастье" },
+        ],
+      },
+      {
+        criterion: "Символ",
+        cells: [
+          { family: "Болконские", value: "Старый дуб — стойкость и перемены" },
+          { family: "Ростовы", value: "Охота — единство и праздник" },
+          { family: "Курагины", value: "Бальный зал — блеск и пустота" },
+          { family: "Безуховы", value: "Звёздное небо — поиск и смысл" },
+        ],
+      },
+    ],
   },
-  {
-    criterion: "Ценности и идеалы",
-    bolkonskie: "Долг, честь, интеллект, гордость",
-    rostovy: "Любовь, радость жизни, традиции",
-    ranevskie: "Красота, беспечность, прошлое",
-    lariny: "Уклад, природа, душевность",
+  cherry: {
+    families: [
+      { name: "Раневские", color: "#4a6741" },
+      { name: "Лопахины", color: "#7a5425" },
+      { name: "Симеоновы-Пищики", color: "#4a3a6b" },
+    ],
+    rows: [
+      {
+        criterion: "Социальное положение",
+        cells: [
+          { family: "Раневские", value: "Разорившееся старое дворянство" },
+          { family: "Лопахины", value: "Новый купеческий класс, бывший крепостной" },
+          { family: "Симеоновы-Пищики", value: "Обедневшее дворянство" },
+        ],
+      },
+      {
+        criterion: "Ценности и идеалы",
+        cells: [
+          { family: "Раневские", value: "Красота, беспечность, память о прошлом" },
+          { family: "Лопахины", value: "Труд, практичность, деньги" },
+          { family: "Симеоновы-Пищики", value: "Выживание, надежда на чудо" },
+        ],
+      },
+      {
+        criterion: "Отношение к деньгам",
+        cells: [
+          { family: "Раневские", value: "Безответственное, ностальгическое" },
+          { family: "Лопахины", value: "Рациональное, деловое" },
+          { family: "Симеоновы-Пищики", value: "Постоянные долги, поиск займов" },
+        ],
+      },
+      {
+        criterion: "Отношение к саду",
+        cells: [
+          { family: "Раневские", value: "Символ жизни, детства, любви" },
+          { family: "Лопахины", value: "Актив для перепродажи под дачи" },
+          { family: "Симеоновы-Пищики", value: "Чужое, стороннее" },
+        ],
+      },
+      {
+        criterion: "Судьба в пьесе",
+        cells: [
+          { family: "Раневские", value: "Потеря имения, отъезд в Париж" },
+          { family: "Лопахины", value: "Покупка сада, новый хозяин жизни" },
+          { family: "Симеоновы-Пищики", value: "Неожиданное спасение — аренда земли" },
+        ],
+      },
+      {
+        criterion: "Символ",
+        cells: [
+          { family: "Раневские", value: "Вишнёвый сад — уходящее прошлое" },
+          { family: "Лопахины", value: "Топор — конец старого мира" },
+          { family: "Симеоновы-Пищики", value: "Долговые расписки" },
+        ],
+      },
+    ],
   },
-  {
-    criterion: "Отношение к деньгам",
-    bolkonskie: "Рациональное, расчётливое",
-    rostovy: "Расточительное, щедрое",
-    ranevskie: "Безответственное, ностальгическое",
-    lariny: "Умеренное, хозяйственное",
+  onegin: {
+    families: [
+      { name: "Ларины", color: "#2a4a6b" },
+      { name: "Онегины", color: "#6b2a4a" },
+      { name: "Ленские", color: "#3d6b2a" },
+    ],
+    rows: [
+      {
+        criterion: "Социальное положение",
+        cells: [
+          { family: "Ларины", value: "Провинциальное дворянство" },
+          { family: "Онегины", value: "Петербургский светский молодой человек" },
+          { family: "Ленские", value: "Молодой романтический помещик" },
+        ],
+      },
+      {
+        criterion: "Ценности и идеалы",
+        cells: [
+          { family: "Ларины", value: "Уклад, природа, душевность" },
+          { family: "Онегины", value: "Скука, разочарование, ум без цели" },
+          { family: "Ленские", value: "Романтика, поэзия, идеализм" },
+        ],
+      },
+      {
+        criterion: "Семейный уклад",
+        cells: [
+          { family: "Ларины", value: "Патриархальный, простой, тёплый" },
+          { family: "Онегины", value: "Светский, одинокий, без корней" },
+          { family: "Ленские", value: "Мечтательный, литературный" },
+        ],
+      },
+      {
+        criterion: "Отношение к любви",
+        cells: [
+          { family: "Ларины", value: "Искренняя, жертвенная (Татьяна)" },
+          { family: "Онегины", value: "Холодное, позднее осознание" },
+          { family: "Ленские", value: "Пылкое, идеализированное" },
+        ],
+      },
+      {
+        criterion: "Судьба",
+        cells: [
+          { family: "Ларины", value: "Татьяна — замужество и тихая трагедия" },
+          { family: "Онегины", value: "Одиночество, запоздалое раскаяние" },
+          { family: "Ленские", value: "Гибель на дуэли" },
+        ],
+      },
+      {
+        criterion: "Символ",
+        cells: [
+          { family: "Ларины", value: "Деревенский дом — покой и природа" },
+          { family: "Онегины", value: "Петербургский кабинет — пустота" },
+          { family: "Ленские", value: "Могила под дубами — нерасцветший талант" },
+        ],
+      },
+    ],
   },
-  {
-    criterion: "Семейные отношения",
-    bolkonskie: "Строгие, отдалённые, с требованиями",
-    rostovy: "Тёплые, близкие, эмоциональные",
-    ranevskie: "Сентиментальные, непрактичные",
-    lariny: "Патриархальные, простые",
+  oblomov: {
+    families: [
+      { name: "Обломовы", color: "#5a3e1b" },
+      { name: "Штольцы", color: "#2a5a4a" },
+      { name: "Пшеницыны", color: "#4a2a5a" },
+    ],
+    rows: [
+      {
+        criterion: "Социальное положение",
+        cells: [
+          { family: "Обломовы", value: "Старинное провинциальное дворянство" },
+          { family: "Штольцы", value: "Смешанное — немецкий отец, русская мать" },
+          { family: "Пшеницыны", value: "Мещанство, вдова чиновника" },
+        ],
+      },
+      {
+        criterion: "Ценности и идеалы",
+        cells: [
+          { family: "Обломовы", value: "Покой, сытость, мечта без действия" },
+          { family: "Штольцы", value: "Деятельность, труд, рациональность" },
+          { family: "Пшеницыны", value: "Домашний уют, забота, простота" },
+        ],
+      },
+      {
+        criterion: "Отношение к труду",
+        cells: [
+          { family: "Обломовы", value: "Лень возведена в принцип" },
+          { family: "Штольцы", value: "Труд — смысл существования" },
+          { family: "Пшеницыны", value: "Бытовой, безропотный" },
+        ],
+      },
+      {
+        criterion: "Воспитание детей",
+        cells: [
+          { family: "Обломовы", value: "Баловство, защита от всего" },
+          { family: "Штольцы", value: "Строгое, деятельное, с ранних лет" },
+          { family: "Пшеницыны", value: "Незаметное, растворённое в быту" },
+        ],
+      },
+      {
+        criterion: "Судьба в романе",
+        cells: [
+          { family: "Обломовы", value: "Тихое угасание, смерть от апатии" },
+          { family: "Штольцы", value: "Успешная жизнь, но внутренняя пустота" },
+          { family: "Пшеницыны", value: "Становятся «обломовским раем»" },
+        ],
+      },
+      {
+        criterion: "Символ",
+        cells: [
+          { family: "Обломовы", value: "Диван — покой и гибель" },
+          { family: "Штольцы", value: "Дорога — движение и цель" },
+          { family: "Пшеницыны", value: "Кухня — уют без смысла" },
+        ],
+      },
+    ],
   },
-  {
-    criterion: "Судьба в произведении",
-    bolkonskie: "Трагическая трансформация",
-    rostovy: "Разорение и возрождение",
-    ranevskie: "Утрата имения, эмиграция",
-    lariny: "Замужество дочерей, разлука",
-  },
-  {
-    criterion: "Символ",
-    bolkonskie: "Старый дуб — стойкость и перемены",
-    rostovy: "Охота — единство и праздник",
-    ranevskie: "Вишнёвый сад — уходящее прошлое",
-    lariny: "Деревенский дом — покой и природа",
-  },
-];
+};
 
 const CHARACTERS = [
   {
@@ -702,7 +900,7 @@ export default function Index() {
       {/* ── Comparison Table ── */}
       <section id="comparison" className="py-20" style={{ background: "#ede5d0" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <div className="ornament-line mb-4">
               <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.7rem", letterSpacing: "0.2em", color: "var(--sepia)" }}>
                 РАЗДЕЛ II
@@ -712,10 +910,34 @@ export default function Index() {
               Сравнительный анализ семей
             </h2>
             <p style={{ color: "var(--ink-light)", fontSize: "0.95rem" }}>
-              Интерактивная таблица для сопоставления семейных образов
+              Переключайте произведение — таблица обновляется автоматически
             </p>
           </div>
 
+          {/* Work switcher */}
+          <div className="flex flex-wrap gap-3 justify-center mb-8">
+            {WORKS.map((work) => (
+              <button
+                key={work.id}
+                onClick={() => setActiveWork(work.id)}
+                style={{
+                  fontFamily: "'Cormorant SC', serif",
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.08em",
+                  padding: "8px 20px",
+                  border: `1px solid ${activeWork === work.id ? work.color : "var(--parchment-dark)"}`,
+                  background: activeWork === work.id ? work.color : "transparent",
+                  color: activeWork === work.id ? "var(--parchment)" : "var(--ink-light)",
+                  cursor: "pointer",
+                  transition: "all 0.3s",
+                }}
+              >
+                {work.title}
+              </button>
+            ))}
+          </div>
+
+          {/* View toggle */}
           <div className="flex justify-center gap-2 mb-8">
             {(["table", "cards"] as const).map((t) => (
               <button
@@ -738,94 +960,106 @@ export default function Index() {
             ))}
           </div>
 
-          {activeTab === "table" && (
-            <div style={{ overflowX: "auto", boxShadow: "0 4px 30px rgba(26,18,8,0.12)" }}>
-              <table className="comparison-table" style={{ width: "100%", borderCollapse: "collapse", background: "white" }}>
-                <thead>
-                  <tr>
-                    <th style={{ background: "var(--ink)", minWidth: 160 }}>Критерий</th>
-                    <th style={{ background: "#7c1c1c", minWidth: 180 }}>
-                      Болконские<br />
-                      <span style={{ fontWeight: 400, fontSize: "0.7rem", opacity: 0.7 }}>Война и мир</span>
-                    </th>
-                    <th style={{ background: "#5a3e1b", minWidth: 180 }}>
-                      Ростовы<br />
-                      <span style={{ fontWeight: 400, fontSize: "0.7rem", opacity: 0.7 }}>Война и мир</span>
-                    </th>
-                    <th style={{ background: "#4a6741", minWidth: 180 }}>
-                      Раневские<br />
-                      <span style={{ fontWeight: 400, fontSize: "0.7rem", opacity: 0.7 }}>Вишнёвый сад</span>
-                    </th>
-                    <th style={{ background: "#2a4a6b", minWidth: 180 }}>
-                      Ларины<br />
-                      <span style={{ fontWeight: 400, fontSize: "0.7rem", opacity: 0.7 }}>Евгений Онегин</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {FAMILY_COMPARISON.map((row, i) => (
-                    <tr key={i}>
-                      <td
+          {(() => {
+            const cmp = WORK_COMPARISONS[activeWork];
+            const work = WORKS.find((w) => w.id === activeWork)!;
+            if (!cmp) return null;
+
+            if (activeTab === "table") {
+              return (
+                <div key={activeWork} className="animate-fade-in" style={{ overflowX: "auto", boxShadow: "0 4px 30px rgba(26,18,8,0.12)" }}>
+                  <table className="comparison-table" style={{ width: "100%", borderCollapse: "collapse", background: "white" }}>
+                    <thead>
+                      <tr>
+                        <th style={{ background: "var(--ink)", minWidth: 160 }}>Критерий</th>
+                        {cmp.families.map((f) => (
+                          <th key={f.name} style={{ background: f.color, minWidth: 180 }}>
+                            {f.name}<br />
+                            <span style={{ fontWeight: 400, fontSize: "0.7rem", opacity: 0.7 }}>{work.title}</span>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cmp.rows.map((row, i) => (
+                        <tr key={i}>
+                          <td
+                            style={{
+                              fontFamily: "'Cormorant SC', serif",
+                              fontSize: "0.78rem",
+                              letterSpacing: "0.05em",
+                              color: "var(--sepia)",
+                              fontWeight: 600,
+                              background: "rgba(139,105,20,0.04)",
+                              borderRight: "1px solid var(--parchment-dark)",
+                            }}
+                          >
+                            {row.criterion}
+                          </td>
+                          {row.cells.map((cell, j) => (
+                            <td key={j} style={{ borderRight: j < row.cells.length - 1 ? "1px solid var(--parchment-dark)" : "none" }}>
+                              {cell.value}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
+
+            return (
+              <div key={activeWork} className="animate-fade-in" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(cmp.families.length, 4)}, 1fr)`, gap: 16 }}>
+                {cmp.families.map((family) => {
+                  const firstRow = cmp.rows.find((r) => r.cells.find((c) => c.family === family.name));
+                  const valuesRow = cmp.rows.find((r) => r.criterion.toLowerCase().includes("ценности"));
+                  return (
+                    <div
+                      key={family.name}
+                      className="lit-card"
+                      style={{
+                        background: "white",
+                        padding: "24px",
+                        borderTop: `4px solid ${family.color}`,
+                      }}
+                    >
+                      <div
                         style={{
-                          fontFamily: "'Cormorant SC', serif",
-                          fontSize: "0.78rem",
-                          letterSpacing: "0.05em",
-                          color: "var(--sepia)",
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "1.35rem",
                           fontWeight: 600,
-                          background: "rgba(139,105,20,0.04)",
-                          borderRight: "1px solid var(--parchment-dark)",
+                          color: family.color,
+                          marginBottom: 4,
                         }}
                       >
-                        {row.criterion}
-                      </td>
-                      <td style={{ borderRight: "1px solid var(--parchment-dark)" }}>{row.bolkonskie}</td>
-                      <td style={{ borderRight: "1px solid var(--parchment-dark)" }}>{row.rostovy}</td>
-                      <td style={{ borderRight: "1px solid var(--parchment-dark)" }}>{row.ranevskie}</td>
-                      <td>{row.lariny}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          {activeTab === "cards" && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { name: "Болконские", work: "Война и мир", color: "#7c1c1c", emoji: "⚔️", desc: "Аристократия старого уклада — честь, долг, интеллект. Отец-генерал как воплощение уходящей эпохи." },
-                { name: "Ростовы", work: "Война и мир", color: "#5a3e1b", emoji: "🎭", desc: "Открытое, щедрое, эмоциональное дворянство. Охота, балы, любовь к жизни — их стихия." },
-                { name: "Раневские", work: "Вишнёвый сад", color: "#4a6741", emoji: "🌸", desc: "Разорённое дворянство, живущее красотой прошлого. Беспечность — и трагедия неизбежного конца." },
-                { name: "Ларины", work: "Евгений Онегин", color: "#2a4a6b", emoji: "📖", desc: "Провинциальные помещики с душой. Простота уклада, природность, верность традициям." },
-              ].map((family) => (
-                <div
-                  key={family.name}
-                  className="lit-card"
-                  style={{
-                    background: "white",
-                    padding: "28px 24px",
-                    borderTop: `4px solid ${family.color}`,
-                  }}
-                >
-                  <div style={{ fontSize: "2.5rem", marginBottom: 12 }}>{family.emoji}</div>
-                  <div
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: "1.4rem",
-                      fontWeight: 600,
-                      color: family.color,
-                      marginBottom: 4,
-                    }}
-                  >
-                    {family.name}
-                  </div>
-                  <div style={{ fontSize: "0.75rem", color: "var(--sepia)", marginBottom: 14, fontStyle: "italic" }}>
-                    {family.work}
-                  </div>
-                  <p style={{ fontSize: "0.88rem", color: "var(--ink-light)", lineHeight: 1.65 }}>{family.desc}</p>
-                </div>
-              ))}
-            </div>
-          )}
+                        {family.name}
+                      </div>
+                      <div style={{ fontSize: "0.72rem", color: "var(--sepia)", marginBottom: 14, fontStyle: "italic" }}>
+                        {work.title}
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                        {cmp.rows.map((row) => {
+                          const cell = row.cells.find((c) => c.family === family.name);
+                          if (!cell) return null;
+                          return (
+                            <div key={row.criterion}>
+                              <div style={{ fontSize: "0.65rem", color: "var(--sepia)", fontFamily: "'Cormorant SC', serif", letterSpacing: "0.08em", marginBottom: 2 }}>
+                                {row.criterion.toUpperCase()}
+                              </div>
+                              <div style={{ fontSize: "0.85rem", color: "var(--ink-light)", lineHeight: 1.5 }}>
+                                {cell.value}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
