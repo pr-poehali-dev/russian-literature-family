@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { FAMILIES } from "@/data/families";
+import { CHARACTERS, WORKS_WITH_CHARS, type Character } from "@/data/characters";
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
@@ -377,6 +378,8 @@ export default function Index() {
   const [activeWork, setActiveWork] = useState("voyna");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"table" | "cards">("table");
+  const [charFilter, setCharFilter] = useState("all");
+  const [selectedChar, setSelectedChar] = useState<Character | null>(null);
 
   const scrollTo = (id: string) => {
     setActiveSection(id);
@@ -607,7 +610,7 @@ export default function Index() {
       {/* ── Clans ── */}
       <section id="clans" className="py-20" style={{ background: "#ede5d0" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <div className="ornament-line mb-4">
               <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.7rem", letterSpacing: "0.2em", color: "var(--sepia)" }}>
                 СЕМЕЙНЫЕ КЛАНЫ
@@ -617,108 +620,111 @@ export default function Index() {
               Анализ: семейные кланы
             </h2>
             <p style={{ color: "var(--ink-light)", fontSize: "0.95rem", maxWidth: 480, margin: "0 auto" }}>
-              Четыре семьи из «Войны и мира» — каждая уникальна по укладу, ценностям и судьбе
+              Выберите произведение — кланы обновятся
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {FAMILIES.map((family, i) => (
-              <div
-                key={family.id}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${i * 0.1}s`, opacity: 0 }}
+          {/* Work switcher */}
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            {WORKS.map((work) => (
+              <button
+                key={work.id}
+                onClick={() => setActiveWork(work.id)}
+                style={{
+                  fontFamily: "'Cormorant SC', serif",
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.08em",
+                  padding: "8px 20px",
+                  border: `1px solid ${activeWork === work.id ? work.color : "var(--parchment-dark)"}`,
+                  background: activeWork === work.id ? work.color : "transparent",
+                  color: activeWork === work.id ? "var(--parchment)" : "var(--ink-light)",
+                  cursor: "pointer",
+                  transition: "all 0.3s",
+                }}
               >
-                <div
-                  style={{
-                    background: "white",
-                    overflow: "hidden",
-                    boxShadow: "0 4px 20px rgba(26,18,8,0.08)",
-                    transition: "transform 0.3s, box-shadow 0.3s",
-                    cursor: "pointer",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    borderTop: `4px solid ${family.color}`,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 36px rgba(26,18,8,0.15)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(26,18,8,0.08)";
-                  }}
-                  onClick={() => navigate(`/family/${family.id}`)}
-                >
-                  {/* Image */}
-                  <div style={{ height: 160, overflow: "hidden", position: "relative" }}>
-                    <img
-                      src={family.image}
-                      alt={family.name}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s" }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: `linear-gradient(to top, ${family.color}cc 0%, transparent 60%)`,
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 10,
-                        left: 14,
-                        fontSize: "1.8rem",
-                      }}
-                    >
-                      {family.emblem}
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div style={{ padding: "18px 20px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
-                    <h3
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "1.35rem",
-                        fontWeight: 600,
-                        color: family.color,
-                        marginBottom: 4,
-                      }}
-                    >
-                      {family.name}
-                    </h3>
-                    <div style={{ fontSize: "0.72rem", color: "var(--sepia)", fontStyle: "italic", marginBottom: 12 }}>
-                      {family.subtitle}
-                    </div>
-                    <p style={{ fontSize: "0.85rem", color: "var(--ink-light)", lineHeight: 1.65, flex: 1 }}>
-                      {family.shortDesc}
-                    </p>
-                    <button
-                      style={{
-                        marginTop: 16,
-                        background: family.color,
-                        color: "var(--parchment)",
-                        border: "none",
-                        padding: "9px 18px",
-                        fontFamily: "'Cormorant SC', serif",
-                        fontSize: "0.72rem",
-                        letterSpacing: "0.1em",
-                        cursor: "pointer",
-                        alignSelf: "flex-start",
-                        transition: "opacity 0.2s",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                      onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                    >
-                      ИЗУЧИТЬ СЕМЬЮ →
-                    </button>
-                  </div>
-                </div>
-              </div>
+                {work.title}
+              </button>
             ))}
           </div>
+
+          {(() => {
+            const activeFamilies = FAMILIES.filter((f) => f.workId === activeWork);
+            const cols = activeFamilies.length <= 2 ? activeFamilies.length : activeFamilies.length <= 3 ? 3 : 4;
+            return (
+              <div
+                key={activeWork}
+                className="animate-fade-in"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                  gap: 20,
+                }}
+              >
+                {activeFamilies.map((family, i) => (
+                  <div
+                    key={family.id}
+                    style={{
+                      background: "white",
+                      overflow: "hidden",
+                      boxShadow: "0 4px 20px rgba(26,18,8,0.08)",
+                      transition: "transform 0.3s, box-shadow 0.3s",
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "column",
+                      borderTop: `4px solid ${family.color}`,
+                      animationDelay: `${i * 0.08}s`,
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 36px rgba(26,18,8,0.15)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(26,18,8,0.08)";
+                    }}
+                    onClick={() => navigate(`/family/${family.id}`)}
+                  >
+                    <div style={{ height: 150, overflow: "hidden", position: "relative" }}>
+                      <img
+                        src={family.image}
+                        alt={family.name}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${family.color}cc 0%, transparent 60%)` }} />
+                      <div style={{ position: "absolute", bottom: 10, left: 14, fontSize: "1.8rem" }}>{family.emblem}</div>
+                    </div>
+                    <div style={{ padding: "18px 20px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
+                      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 600, color: family.color, marginBottom: 4 }}>
+                        {family.name}
+                      </h3>
+                      <div style={{ fontSize: "0.72rem", color: "var(--sepia)", fontStyle: "italic", marginBottom: 10 }}>
+                        {family.subtitle}
+                      </div>
+                      <p style={{ fontSize: "0.85rem", color: "var(--ink-light)", lineHeight: 1.65, flex: 1 }}>
+                        {family.shortDesc}
+                      </p>
+                      <button
+                        style={{
+                          marginTop: 14,
+                          background: family.color,
+                          color: "var(--parchment)",
+                          border: "none",
+                          padding: "8px 16px",
+                          fontFamily: "'Cormorant SC', serif",
+                          fontSize: "0.7rem",
+                          letterSpacing: "0.1em",
+                          cursor: "pointer",
+                          alignSelf: "flex-start",
+                        }}
+                      >
+                        ИЗУЧИТЬ СЕМЬЮ →
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
