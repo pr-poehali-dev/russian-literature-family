@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { FAMILIES } from "@/data/families";
-import { CHARACTERS, WORKS_WITH_CHARS, type Character } from "@/data/characters";
+import { CHARACTERS, type Character } from "@/data/characters";
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
@@ -24,6 +24,46 @@ const WORKS = [
     tag: "Роман-эпопея",
     families: ["Болконские", "Ростовы", "Курагины", "Безуховы"],
     color: "#7c1c1c",
+    quote: "«Всё, всё, что было, всё, что есть, и всё, что будет — всё это я»",
+    summary: "Роман-эпопея охватывает 15 лет истории России — от Аустерлица до Бородино. В центре — четыре семейных клана, каждый из которых воплощает свою Россию. Толстой сталкивает живую и мёртвую жизнь: Ростовы с их открытостью против Курагиных с их расчётом; Болконские с гордостью интеллекта против Безуховых с поиском смысла.",
+    familyDetails: [
+      {
+        name: "Болконские",
+        color: "#7c1c1c",
+        emoji: "⚔️",
+        role: "Аристократия долга и чести",
+        portrait: "Старый князь Николай Андреевич — тиран с кодексом чести. Сын Андрей — офицер-философ, ищущий смысл через войну и любовь. Дочь Марья — жертвующая собой во имя отца и веры. Семья как крепость: холодная снаружи, глубокая внутри.",
+        keyMoment: "«Небо Аустерлица» — Андрей ранен, смотрит в небо и понимает тщетность честолюбия",
+        arc: "Трагическая трансформация: от гордости к смирению и смерти",
+      },
+      {
+        name: "Ростовы",
+        color: "#5a3e1b",
+        emoji: "🎭",
+        role: "Душа московского дворянства",
+        portrait: "Граф Илья — хлебосол и транжира. Графиня — мать, живущая детьми. Николай — честный офицер. Наташа — живая, непосредственная, магнетичная. Петя — погибший юноша. Семья как праздник: тёплая, щедрая, обречённая на разорение.",
+        keyMoment: "Святочные гуляния в Отрадном — семья в своей стихии: охота, ряженые, народные песни",
+        arc: "Разорение ради человечности — Наташа отдаёт подводы раненым",
+      },
+      {
+        name: "Курагины",
+        color: "#2a4a6b",
+        emoji: "👑",
+        role: "Блеск без содержания",
+        portrait: "Князь Василий — мастер придворных интриг, делающий всё ради выгоды. Элен — красавица-хищница, брак для которой — сделка. Анатоль — кутила без совести, разрушающий чужие жизни. Семья как зеркало: ослепляет, но ничего не отражает.",
+        keyMoment: "Женитьба Пьера на Элен — ловушка захлопывается. Пьер сам идёт в неё, ослеплённый красотой",
+        arc: "Крах: Элен умирает, Анатоль теряет ногу и исчезает",
+      },
+      {
+        name: "Безуховы",
+        color: "#3d6b2a",
+        emoji: "📚",
+        role: "Поиск смысла через страдание",
+        portrait: "Пьер — незаконнорождённый наследник, нелепый и искренний в светском мире. Его путь — самый длинный: масонство, война, плен, Каратаев, любовь. Он не герой по рождению, но становится им по выбору. Семья создаётся им с нуля — через Наташу.",
+        keyMoment: "Платон Каратаев в плену — простой мужик открывает Пьеру истину, которую он искал во всех книгах",
+        arc: "Перерождение: от потерянного юноши к человеку, нашедшему смысл в любви и простоте",
+      },
+    ],
   },
   {
     id: "cherry",
@@ -31,8 +71,30 @@ const WORKS = [
     author: "А. П. Чехов",
     year: "1904",
     tag: "Пьеса",
-    families: ["Раневские"],
+    families: ["Раневские", "Лопахины"],
     color: "#4a6741",
+    quote: "«О, мой милый, мой нежный, прекрасный сад! Моя жизнь, моя молодость, счастье моё!»",
+    summary: "Последняя пьеса Чехова — реквием по уходящей дворянской России. Три поколения на сцене: прошлое (Раневская), настоящее (Лопахин) и будущее (Аня и Петя). Звук лопнувшей струны и удары топора — звуковая метафора смены эпох. Чехов не осуждает никого: он сочувствует всем.",
+    familyDetails: [
+      {
+        name: "Раневские",
+        color: "#4a6741",
+        emoji: "🌸",
+        role: "Уходящая красота",
+        portrait: "Любовь Андреевна — женщина с прекрасной душой и атрофированной волей. Она любит искренне — и сад, и людей, и своё прошлое. Брат Гаев произносит монологи шкафу. Дочь Аня смотрит вперёд. Приёмная Варя держит хозяйство последними силами. Семья как вишнёвый сад: прекрасная, но обречённая.",
+        keyMoment: "Раневская раздаёт золотой нищему, когда нечем платить по долгам — беспечность как образ жизни",
+        arc: "Потеря всего — имения, прошлого, уклада. Отъезд в Париж. За сценой звучит топор",
+      },
+      {
+        name: "Лопахины",
+        color: "#7a5425",
+        emoji: "🪓",
+        role: "Новая Россия",
+        portrait: "Ермолай Лопахин — сын крепостного, купивший имение своих господ. Встаёт в пять утра. Работает. Искренне хотел помочь Раневской — она не слышала. Его победа горькая: он разрушает то, что любит. «Вишнёвый сад теперь мой!» — кричит с растерянностью, а не с торжеством.",
+        keyMoment: "Торги — Лопахин покупает сад. Сам не понимает, рад ли этому",
+        arc: "Победитель без радости — новый хозяин жизни, не умеющий наслаждаться победой",
+      },
+    ],
   },
   {
     id: "onegin",
@@ -40,8 +102,39 @@ const WORKS = [
     author: "А. С. Пушкин",
     year: "1833",
     tag: "Роман в стихах",
-    families: ["Ларины", "Онегины"],
+    families: ["Ларины", "Онегины", "Ленские"],
     color: "#2a4a6b",
+    quote: "«Татьяна — русская душою, сама не зная почему...»",
+    summary: "«Энциклопедия русской жизни» первой трети XIX века. Три семейных мира: провинциальные Ларины с их патриархальным теплом, петербургский Онегин — «лишний человек» без корней, романтик Ленский — идеалист без будущего. Пушкин сталкивает их и наблюдает: кто выживет духовно?",
+    familyDetails: [
+      {
+        name: "Ларины",
+        color: "#2a4a6b",
+        emoji: "📖",
+        role: "Провинциальная душа России",
+        portrait: "Мать-Ларина когда-то сама была романтической барышней, влюблённой во французские романы. Жизнь превратила её в образцовую помещицу. Татьяна унаследовала мечтательность, Ольга — беззаботность. Дом Лариных — тихий рай патриархальной России, который Пушкин любит и немного иронизирует.",
+        keyMoment: "Письмо Татьяны — провинциальная барышня пишет первой, нарушая все приличия",
+        arc: "Татьяна уезжает в Москву, выходит замуж — и остаётся верной долгу, отвергнув Онегина",
+      },
+      {
+        name: "Онегины",
+        color: "#6b2a4a",
+        emoji: "🥀",
+        role: "«Лишний человек»",
+        portrait: "Евгений — умный, образованный, скучающий. Петербургские удовольствия опустошили его в 26 лет. В деревне такая же хандра. Он отвергает Татьяну не из жестокости — из неспособности любить вовремя. Убивает Ленского не из ненависти — из трусости перед светским мнением.",
+        keyMoment: "Отповедь Татьяне — холодная, правильная, убийственная. Онегин объясняет ей, почему не может её любить",
+        arc: "Запоздалое прозрение: полюбил, когда было уже поздно",
+      },
+      {
+        name: "Ленские",
+        color: "#3d6b2a",
+        emoji: "🕊️",
+        role: "Нерасцветший идеализм",
+        portrait: "Владимир Ленский — поэт, романтик, студент геттингенской школы. Влюблён в Ольгу безоглядно, хотя она, по сути, его не понимает. Дружит с Онегиным — духовной противоположностью. Гибнет на дуэли, которой можно было избежать. Его смерть — самая горькая страница романа.",
+        keyMoment: "Предсмертные стихи — Ленский пишет их накануне дуэли: «Паду ли я стрелой пронзённый...»",
+        arc: "Гибель на дуэли — нераскрытый потенциал, унесённый ради пустяка",
+      },
+    ],
   },
   {
     id: "oblomov",
@@ -51,6 +144,28 @@ const WORKS = [
     tag: "Роман",
     families: ["Обломовы", "Штольцы"],
     color: "#5a3e1b",
+    quote: "«Обломовка — вот моё отечество!»",
+    summary: "Роман о двух моделях жизни: патриархальном покое и деятельной современности. Обломов и Штольц — друзья и антиподы. Гончаров ставит вопрос: что ценнее — мечтательная русская душа или немецкая практичность? И не даёт однозначного ответа: оба пути чего-то стоят и чего-то лишены.",
+    familyDetails: [
+      {
+        name: "Обломовы",
+        color: "#5a3e1b",
+        emoji: "🛋️",
+        role: "Идиллия как ловушка",
+        portrait: "Обломовка — имение, где ничего не меняется и всё движется лениво. Илью там баловали, оберегали от всего, не давали делать ничего самому. Результат — человек с прекрасной душой и полным параличом воли. Обломов добр, умён, тонко чувствует — и не может встать с дивана.",
+        keyMoment: "«Сон Обломова» — воспоминание об Обломовке как об утраченном рае, объясняющее всё",
+        arc: "Тихое угасание: от дивана к Пшеницыной, от мечты к смерти",
+      },
+      {
+        name: "Штольцы",
+        color: "#2a5a4a",
+        emoji: "💼",
+        role: "Деятельность как вера",
+        portrait: "Андрей Штольц воспитан отцом-немцем в труде с детства. Каждое утро — план, каждый вечер — результат. Он успешен, он добр, он верен дружбе. Берёт сына Обломова на воспитание. Но Гончаров тонко намекает: и Штольц в финале не вполне спокоен — рядом с его успехом живёт тревога.",
+        keyMoment: "Диагноз «обломовщина» — Штольц впервые произносит это слово, глядя на друга с болью и пониманием",
+        arc: "Победитель, но не триумфатор — успех достигнут, но рядом с ним живёт пустота",
+      },
+    ],
   },
 ];
 
@@ -297,40 +412,7 @@ const WORK_COMPARISONS: Record<string, { families: { name: string; color: string
   },
 };
 
-const CHARACTERS = [
-  {
-    name: "Наташа Ростова",
-    work: "Война и мир",
-    role: "Главная героиня",
-    traits: ["Искренность", "Жизнелюбие", "Интуиция"],
-    quote: "Весь мир разделён для меня на две половины: одна — она, и там всё счастье, надежда, свет...",
-    symbol: "🌺",
-  },
-  {
-    name: "Андрей Болконский",
-    work: "Война и мир",
-    role: "Главный герой",
-    traits: ["Гордость", "Поиск смысла", "Честь"],
-    quote: "Надо жить, надо любить, надо верить.",
-    symbol: "⚔️",
-  },
-  {
-    name: "Любовь Раневская",
-    work: "Вишнёвый сад",
-    role: "Главная героиня",
-    traits: ["Сентиментальность", "Беспечность", "Элегия"],
-    quote: "О, мой милый, мой нежный, прекрасный сад!",
-    symbol: "🌸",
-  },
-  {
-    name: "Татьяна Ларина",
-    work: "Евгений Онегин",
-    role: "Главная героиня",
-    traits: ["Искренность", "Долг", "Мечтательность"],
-    quote: "Я вас люблю — к чему лукавить?",
-    symbol: "📖",
-  },
-];
+
 
 const BIBLIOGRAPHY = [
   {
@@ -768,135 +850,105 @@ export default function Index() {
           </div>
 
           {WORKS.filter((w) => w.id === activeWork).map((work) => (
-            <div
-              key={work.id}
-              className="animate-fade-in paper-texture"
-              style={{
-                background: "white",
-                padding: "40px 48px",
-                borderTop: `4px solid ${work.color}`,
-                boxShadow: "0 4px 30px rgba(26,18,8,0.08)",
-              }}
-            >
-              <div className="grid md:grid-cols-2 gap-10">
-                <div>
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <span
-                        style={{
-                          color: work.color,
-                          borderColor: work.color,
-                          fontSize: "0.65rem",
-                          letterSpacing: "0.12em",
-                          fontFamily: "'Cormorant SC', serif",
-                          border: "1px solid",
-                          padding: "2px 10px",
-                        }}
-                      >
-                        {work.tag}
-                      </span>
-                      <h3
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: "2rem",
-                          fontWeight: 500,
-                          color: "var(--ink)",
-                          marginTop: 12,
-                          marginBottom: 4,
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {work.title}
-                      </h3>
-                      <p style={{ color: "var(--sepia)", fontSize: "0.9rem", fontStyle: "italic" }}>
-                        {work.author}, {work.year}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--parchment-dark)", paddingTop: 20 }}>
-                    <div
-                      style={{
-                        fontFamily: "'Cormorant SC', serif",
-                        fontSize: "0.7rem",
-                        letterSpacing: "0.15em",
-                        color: "var(--sepia)",
-                        marginBottom: 12,
-                      }}
-                    >
+            <div key={work.id} className="animate-fade-in">
+              {/* Header card */}
+              <div
+                style={{
+                  background: "white",
+                  padding: "36px 44px",
+                  borderTop: `4px solid ${work.color}`,
+                  boxShadow: "0 4px 30px rgba(26,18,8,0.08)",
+                  marginBottom: 24,
+                }}
+              >
+                <div className="grid md:grid-cols-2 gap-10 items-start">
+                  <div>
+                    <span style={{ color: work.color, border: `1px solid ${work.color}`, fontSize: "0.65rem", letterSpacing: "0.12em", fontFamily: "'Cormorant SC', serif", padding: "2px 10px" }}>
+                      {work.tag}
+                    </span>
+                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.2rem", fontWeight: 500, color: "var(--ink)", marginTop: 12, marginBottom: 4, lineHeight: 1.2 }}>
+                      {work.title}
+                    </h3>
+                    <p style={{ color: "var(--sepia)", fontSize: "0.9rem", fontStyle: "italic", marginBottom: 20 }}>
+                      {work.author}, {work.year}
+                    </p>
+                    <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.68rem", letterSpacing: "0.15em", color: "var(--sepia)", marginBottom: 10 }}>
                       СЕМЕЙНЫЕ КЛАНЫ
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {work.families.map((f) => (
-                        <span
-                          key={f}
-                          style={{
-                            background: `${work.color}15`,
-                            border: `1px solid ${work.color}40`,
-                            color: work.color,
-                            padding: "4px 14px",
-                            fontSize: "0.85rem",
-                            fontFamily: "'Cormorant Garamond', serif",
-                            fontStyle: "italic",
-                          }}
-                        >
+                      {work.families.map((f: string) => (
+                        <span key={f} style={{ background: `${work.color}15`, border: `1px solid ${work.color}40`, color: work.color, padding: "4px 14px", fontSize: "0.85rem", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}>
                           {f}
                         </span>
                       ))}
                     </div>
                   </div>
+                  <div>
+                    <blockquote style={{ marginBottom: 16 }}>{work.quote}</blockquote>
+                    <p style={{ color: "var(--ink-light)", fontSize: "0.92rem", lineHeight: 1.8 }}>{work.summary}</p>
+                  </div>
                 </div>
+              </div>
 
-                <div>
-                  {work.id === "voyna" && (
-                    <>
-                      <blockquote style={{ marginBottom: 20 }}>
-                        «Всё, всё, что было, всё, что есть, и всё, что будет — всё это я. Я — это всё...»
-                      </blockquote>
-                      <p style={{ color: "var(--ink-light)", fontSize: "0.9rem", lineHeight: 1.75 }}>
-                        В романе-эпопее Толстой противопоставляет три семейных модели: аристократическую строгость
-                        Болконских, сердечную открытость Ростовых и расчётливый цинизм Курагиных. Семья как
-                        микрокосм России, переживающей войну и переустройство.
+              {/* Family detail cards */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${Math.min(((work as { familyDetails?: unknown[] }).familyDetails?.length ?? 2), 2)}, 1fr)`,
+                  gap: 16,
+                }}
+              >
+                {((work as { familyDetails?: { name: string; color: string; emoji: string; role: string; portrait: string; keyMoment: string; arc: string }[] }).familyDetails || []).map((fd, idx: number) => (
+                  <div
+                    key={fd.name}
+                    className="animate-fade-in-up"
+                    style={{
+                      background: "white",
+                      borderLeft: `4px solid ${fd.color}`,
+                      padding: "28px 28px",
+                      boxShadow: "0 2px 16px rgba(26,18,8,0.06)",
+                      animationDelay: `${idx * 0.1}s`,
+                      opacity: 0,
+                    }}
+                  >
+                    {/* Family header */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <span style={{ fontSize: "1.8rem" }}>{fd.emoji}</span>
+                      <div>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 600, color: fd.color, lineHeight: 1.1 }}>
+                          {fd.name}
+                        </div>
+                        <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.65rem", letterSpacing: "0.1em", color: "var(--sepia)" }}>
+                          {fd.role.toUpperCase()}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Portrait */}
+                    <p style={{ fontSize: "0.9rem", color: "var(--ink-light)", lineHeight: 1.75, marginBottom: 16 }}>
+                      {fd.portrait}
+                    </p>
+
+                    {/* Key moment */}
+                    <div style={{ background: `${fd.color}08`, border: `1px solid ${fd.color}25`, padding: "12px 16px", marginBottom: 12 }}>
+                      <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.62rem", letterSpacing: "0.12em", color: fd.color, marginBottom: 6 }}>
+                        КЛЮЧЕВОЙ МОМЕНТ
+                      </div>
+                      <p style={{ fontSize: "0.85rem", color: "var(--ink)", lineHeight: 1.6, fontStyle: "italic" }}>
+                        {fd.keyMoment}
                       </p>
-                    </>
-                  )}
-                  {work.id === "cherry" && (
-                    <>
-                      <blockquote style={{ marginBottom: 20 }}>
-                        «О, мой милый, мой нежный, прекрасный сад! Моя жизнь, моя молодость, счастье моё, прощай!»
-                      </blockquote>
-                      <p style={{ color: "var(--ink-light)", fontSize: "0.9rem", lineHeight: 1.75 }}>
-                        Чехов изображает семью Раневских как воплощение уходящей дворянской культуры.
-                        Вишнёвый сад — это не просто имение, но образ памяти, детства и невозможности
-                        вернуться к прошлому.
-                      </p>
-                    </>
-                  )}
-                  {work.id === "onegin" && (
-                    <>
-                      <blockquote style={{ marginBottom: 20 }}>
-                        «Татьяна — русская душою, сама не зная почему с её холодною красою любила русскую зиму.»
-                      </blockquote>
-                      <p style={{ color: "var(--ink-light)", fontSize: "0.9rem", lineHeight: 1.75 }}>
-                        Семья Лариных у Пушкина — это идеал патриархального провинциального дворянства.
-                        Мать-Ларина, когда-то романтическая барышня, стала образцовой помещицей.
-                        Дочери унаследовали разные грани её натуры.
-                      </p>
-                    </>
-                  )}
-                  {work.id === "oblomov" && (
-                    <>
-                      <blockquote style={{ marginBottom: 20 }}>
-                        «Обломовка — вот моё отечество!»
-                      </blockquote>
-                      <p style={{ color: "var(--ink-light)", fontSize: "0.9rem", lineHeight: 1.75 }}>
-                        Гончаров исследует две противоположные модели существования через семьи
-                        Обломовых и Штольцев: патриархальный покой vs деятельная немецкая практичность.
-                        Обломовщина как культурный феномен, порождённый семейным воспитанием.
-                      </p>
-                    </>
-                  )}
-                </div>
+                    </div>
+
+                    {/* Arc */}
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <div style={{ width: 3, height: 3, borderRadius: "50%", background: fd.color, flexShrink: 0, marginTop: 7 }} />
+                      <div>
+                        <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.62rem", letterSpacing: "0.1em", color: "var(--sepia)" }}>СУДЬБА: </span>
+                        <span style={{ fontSize: "0.85rem", color: "var(--ink-light)" }}>{fd.arc}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -1072,7 +1124,7 @@ export default function Index() {
       {/* ── Characters ── */}
       <section id="characters" className="py-20" style={{ background: "var(--parchment)" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <div className="ornament-line mb-4">
               <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.7rem", letterSpacing: "0.2em", color: "var(--sepia)" }}>
                 РАЗДЕЛ III
@@ -1082,85 +1134,200 @@ export default function Index() {
               Галерея персонажей
             </h2>
             <p style={{ color: "var(--ink-light)", fontSize: "0.95rem" }}>
-              Ключевые образы русской литературной классики
+              {CHARACTERS.length} персонажей из {WORKS.length} произведений
             </p>
           </div>
 
-          <div
-            className="grid md:grid-cols-2 gap-6"
-            style={{
-              backgroundImage: `url(https://cdn.poehali.dev/projects/8b465ba0-e0a4-428c-bc9c-aae099dbb6f9/files/aae7fdac-5a46-4bc4-81ef-5b146b512085.jpg)`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              padding: "2px",
-            }}
-          >
-            {CHARACTERS.map((char, i) => (
-              <div
-                key={char.name}
-                className="lit-card animate-fade-in-up"
+          {/* Filter by work */}
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            <button
+              onClick={() => setCharFilter("all")}
+              style={{
+                fontFamily: "'Cormorant SC', serif", fontSize: "0.75rem", letterSpacing: "0.08em",
+                padding: "7px 18px",
+                border: `1px solid ${charFilter === "all" ? "var(--ink)" : "var(--parchment-dark)"}`,
+                background: charFilter === "all" ? "var(--ink)" : "transparent",
+                color: charFilter === "all" ? "var(--parchment)" : "var(--ink-light)",
+                cursor: "pointer", transition: "all 0.3s",
+              }}
+            >
+              ВСЕ
+            </button>
+            {WORKS.map((w) => (
+              <button
+                key={w.id}
+                onClick={() => setCharFilter(w.id)}
                 style={{
-                  background: "rgba(245,239,224,0.97)",
-                  padding: "28px 28px",
-                  animationDelay: `${i * 0.12}s`,
-                  opacity: 0,
+                  fontFamily: "'Cormorant SC', serif", fontSize: "0.75rem", letterSpacing: "0.08em",
+                  padding: "7px 18px",
+                  border: `1px solid ${charFilter === w.id ? w.color : "var(--parchment-dark)"}`,
+                  background: charFilter === w.id ? w.color : "transparent",
+                  color: charFilter === w.id ? "var(--parchment)" : "var(--ink-light)",
+                  cursor: "pointer", transition: "all 0.3s",
                 }}
               >
-                <div className="flex items-start gap-4">
+                {w.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid */}
+          <div className="grid md:grid-cols-2 gap-5">
+            {CHARACTERS
+              .filter((c) => charFilter === "all" || c.workId === charFilter)
+              .map((char, i) => {
+                const workColor = WORKS.find((w) => w.id === char.workId)?.color ?? "var(--sepia)";
+                const isOpen = selectedChar?.name === char.name;
+                return (
                   <div
+                    key={char.name}
+                    className="animate-fade-in-up"
                     style={{
-                      width: 56,
-                      height: 56,
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "1.8rem",
-                      background: "var(--parchment-dark)",
-                      flexShrink: 0,
-                      border: "1px solid var(--gold)",
+                      background: "white",
+                      borderTop: `3px solid ${workColor}`,
+                      boxShadow: isOpen ? "0 8px 32px rgba(26,18,8,0.14)" : "0 2px 12px rgba(26,18,8,0.06)",
+                      transition: "box-shadow 0.3s",
+                      animationDelay: `${i * 0.08}s`,
+                      opacity: 0,
                     }}
                   >
-                    {char.symbol}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <h3
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "1.3rem",
-                        fontWeight: 600,
-                        color: "var(--ink)",
-                        marginBottom: 2,
-                      }}
+                    {/* Card header — always visible */}
+                    <div
+                      style={{ padding: "22px 24px", cursor: "pointer" }}
+                      onClick={() => setSelectedChar(isOpen ? null : char)}
                     >
-                      {char.name}
-                    </h3>
-                    <div style={{ fontSize: "0.78rem", color: "var(--sepia)", fontStyle: "italic", marginBottom: 12 }}>
-                      {char.role} · {char.work}
+                      <div className="flex items-start gap-4">
+                        <div style={{
+                          width: 52, height: 52, borderRadius: "50%", flexShrink: 0,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: "1.6rem", background: "var(--parchment-dark)",
+                          border: `1px solid ${workColor}40`,
+                        }}>
+                          {char.symbol}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontWeight: 600, color: "var(--ink)", marginBottom: 2 }}>
+                                {char.name}
+                              </h3>
+                              <div style={{ fontSize: "0.75rem", color: workColor, fontStyle: "italic", marginBottom: 8 }}>
+                                {char.role} · {char.work}
+                              </div>
+                            </div>
+                            <div style={{ color: "var(--sepia)", fontSize: "0.75rem", fontFamily: "'Cormorant SC', serif", letterSpacing: "0.08em", flexShrink: 0 }}>
+                              {isOpen ? "СКРЫТЬ ▲" : "ПОДРОБНЕЕ ▼"}
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {char.traits.map((t) => (
+                              <span key={t} style={{ background: `${workColor}12`, border: `1px solid ${workColor}30`, color: workColor, padding: "2px 10px", fontSize: "0.72rem" }}>
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {char.traits.map((t) => (
-                        <span
-                          key={t}
-                          style={{
-                            background: "var(--parchment-dark)",
-                            color: "var(--ink-light)",
-                            padding: "2px 10px",
-                            fontSize: "0.75rem",
-                            letterSpacing: "0.05em",
-                          }}
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <blockquote style={{ fontSize: "0.88rem", borderLeftWidth: 2, paddingLeft: 14, marginTop: 0 }}>
-                      {char.quote}
-                    </blockquote>
+
+                    {/* Expanded content */}
+                    {isOpen && (
+                      <div style={{ borderTop: "1px solid var(--parchment-dark)", padding: "24px 24px 28px" }}>
+
+                        {/* Meta row */}
+                        <div className="grid grid-cols-2 gap-3 mb-5">
+                          {char.status && (
+                            <div style={{ background: "var(--parchment)", padding: "10px 14px" }}>
+                              <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.6rem", letterSpacing: "0.12em", color: "var(--sepia)", marginBottom: 3 }}>СТАТУС</div>
+                              <div style={{ fontSize: "0.82rem", color: "var(--ink)" }}>{char.status}</div>
+                            </div>
+                          )}
+                          {(char.ageStart || char.ageEnd) && (
+                            <div style={{ background: "var(--parchment)", padding: "10px 14px" }}>
+                              <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.6rem", letterSpacing: "0.12em", color: "var(--sepia)", marginBottom: 3 }}>ВОЗРАСТ</div>
+                              <div style={{ fontSize: "0.82rem", color: "var(--ink)" }}>
+                                {char.ageStart && `Начало: ${char.ageStart}`}
+                                {char.ageStart && char.ageEnd && " → "}
+                                {char.ageEnd && `Финал: ${char.ageEnd}`}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Description */}
+                        <p style={{ fontSize: "0.9rem", color: "var(--ink-light)", lineHeight: 1.78, marginBottom: 18 }}>
+                          {char.description}
+                        </p>
+
+                        {/* Key episodes */}
+                        {char.episodes && char.episodes.length > 0 && (
+                          <div style={{ marginBottom: 18 }}>
+                            <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.65rem", letterSpacing: "0.14em", color: "var(--sepia)", marginBottom: 10 }}>
+                              КЛЮЧЕВЫЕ ЭПИЗОДЫ
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                              {char.episodes.map((ep, ei) => (
+                                <div key={ei} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                                  <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.62rem", color: workColor, border: `1px solid ${workColor}40`, padding: "2px 7px", whiteSpace: "nowrap", flexShrink: 0, marginTop: 2 }}>
+                                    {ep.volume}
+                                  </span>
+                                  <span style={{ fontSize: "0.85rem", color: "var(--ink-light)", lineHeight: 1.55 }}>{ep.description}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Relations */}
+                        {char.relations && char.relations.length > 0 && (
+                          <div style={{ marginBottom: 18 }}>
+                            <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.65rem", letterSpacing: "0.14em", color: "var(--sepia)", marginBottom: 10 }}>
+                              ОТНОШЕНИЯ
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {char.relations.map((rel, ri) => (
+                                <div key={ri} style={{ background: "var(--parchment)", border: "1px solid var(--parchment-dark)", padding: "6px 12px" }}>
+                                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.85rem", fontWeight: 600, color: "var(--ink)" }}>{rel.name}</span>
+                                  <span style={{ fontSize: "0.75rem", color: "var(--sepia)", marginLeft: 6 }}>— {rel.type}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Quotes */}
+                        {char.quotes && char.quotes.length > 0 && (
+                          <div style={{ marginBottom: 16 }}>
+                            <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.65rem", letterSpacing: "0.14em", color: "var(--sepia)", marginBottom: 10 }}>
+                              ЦИТАТЫ
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                              {char.quotes.map((q, qi) => (
+                                <div key={qi}>
+                                  <blockquote style={{ fontSize: "0.88rem", borderLeftWidth: 2, paddingLeft: 14, margin: 0, marginBottom: 2 }}>
+                                    {q.text}
+                                  </blockquote>
+                                  <div style={{ fontSize: "0.7rem", color: "var(--sepia)", paddingLeft: 14 }}>{q.source}</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Conclusion */}
+                        {char.conclusion && (
+                          <div style={{ background: `${workColor}08`, borderLeft: `3px solid ${workColor}`, padding: "12px 16px" }}>
+                            <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.62rem", letterSpacing: "0.12em", color: workColor, marginBottom: 6 }}>
+                              ЗНАЧЕНИЕ В ПРОИЗВЕДЕНИИ
+                            </div>
+                            <p style={{ fontSize: "0.88rem", color: "var(--ink)", lineHeight: 1.65 }}>{char.conclusion}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
           </div>
         </div>
       </section>
