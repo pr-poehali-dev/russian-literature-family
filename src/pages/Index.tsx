@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { FAMILIES } from "@/data/families";
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS = [
   { id: "hero", label: "Главная" },
+  { id: "clans", label: "Кланы" },
   { id: "analysis", label: "Анализ" },
   { id: "comparison", label: "Сравнение" },
   { id: "characters", label: "Персонажи" },
@@ -171,6 +174,7 @@ const BIBLIOGRAPHY = [
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function Index() {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("hero");
   const [activeWork, setActiveWork] = useState("voyna");
   const [searchQuery, setSearchQuery] = useState("");
@@ -399,6 +403,124 @@ export default function Index() {
         >
           ЛИСТАТЬ
           <div style={{ width: 1, height: 36, background: "var(--gold)" }} />
+        </div>
+      </section>
+
+      {/* ── Clans ── */}
+      <section id="clans" className="py-20" style={{ background: "#ede5d0" }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <div className="ornament-line mb-4">
+              <span style={{ fontFamily: "'Cormorant SC', serif", fontSize: "0.7rem", letterSpacing: "0.2em", color: "var(--sepia)" }}>
+                СЕМЕЙНЫЕ КЛАНЫ
+              </span>
+            </div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 300, color: "var(--ink)", marginBottom: 12 }}>
+              Анализ: семейные кланы
+            </h2>
+            <p style={{ color: "var(--ink-light)", fontSize: "0.95rem", maxWidth: 480, margin: "0 auto" }}>
+              Четыре семьи из «Войны и мира» — каждая уникальна по укладу, ценностям и судьбе
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {FAMILIES.map((family, i) => (
+              <div
+                key={family.id}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${i * 0.1}s`, opacity: 0 }}
+              >
+                <div
+                  style={{
+                    background: "white",
+                    overflow: "hidden",
+                    boxShadow: "0 4px 20px rgba(26,18,8,0.08)",
+                    transition: "transform 0.3s, box-shadow 0.3s",
+                    cursor: "pointer",
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    borderTop: `4px solid ${family.color}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 36px rgba(26,18,8,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(26,18,8,0.08)";
+                  }}
+                  onClick={() => navigate(`/family/${family.id}`)}
+                >
+                  {/* Image */}
+                  <div style={{ height: 160, overflow: "hidden", position: "relative" }}>
+                    <img
+                      src={family.image}
+                      alt={family.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s" }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: `linear-gradient(to top, ${family.color}cc 0%, transparent 60%)`,
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 10,
+                        left: 14,
+                        fontSize: "1.8rem",
+                      }}
+                    >
+                      {family.emblem}
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div style={{ padding: "18px 20px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
+                    <h3
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.35rem",
+                        fontWeight: 600,
+                        color: family.color,
+                        marginBottom: 4,
+                      }}
+                    >
+                      {family.name}
+                    </h3>
+                    <div style={{ fontSize: "0.72rem", color: "var(--sepia)", fontStyle: "italic", marginBottom: 12 }}>
+                      {family.subtitle}
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--ink-light)", lineHeight: 1.65, flex: 1 }}>
+                      {family.shortDesc}
+                    </p>
+                    <button
+                      style={{
+                        marginTop: 16,
+                        background: family.color,
+                        color: "var(--parchment)",
+                        border: "none",
+                        padding: "9px 18px",
+                        fontFamily: "'Cormorant SC', serif",
+                        fontSize: "0.72rem",
+                        letterSpacing: "0.1em",
+                        cursor: "pointer",
+                        alignSelf: "flex-start",
+                        transition: "opacity 0.2s",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                      onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                    >
+                      ИЗУЧИТЬ СЕМЬЮ →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
