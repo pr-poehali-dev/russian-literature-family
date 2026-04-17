@@ -531,9 +531,7 @@ export default function Index() {
               border: "1px solid var(--gold)",
               padding: "4px 12px",
             }}
-          >
-            РЕЦЕНЗИРУЕМЫЙ
-          </div>
+          ></div>
         </div>
       </nav>
 
