@@ -504,9 +504,7 @@ export default function Index() {
               >
                 ЛИТЕРА
               </div>
-              <div style={{ fontSize: "0.6rem", color: "var(--sepia)", letterSpacing: "0.12em" }}>
-                ИССЛЕДОВАТЕЛЬСКИЙ ПОРТАЛ
-              </div>
+              <div style={{ fontSize: "0.6rem", color: "var(--sepia)", letterSpacing: "0.12em" }}>ИССЛЕДОВАТЕЛЬСКИЙ ПРОЕКТ</div>
             </div>
           </div>
 
