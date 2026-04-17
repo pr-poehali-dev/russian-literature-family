@@ -1419,12 +1419,8 @@ export default function Index() {
 
       {/* ── Footer ── */}
       <footer style={{ background: "var(--ink)", color: "var(--parchment)", padding: "40px 24px", textAlign: "center" }}>
-        <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "1.2rem", letterSpacing: "0.2em", marginBottom: 8 }}>
-          ЛИТЕРА
-        </div>
-        <div style={{ fontSize: "0.75rem", color: "rgba(245,239,224,0.5)", letterSpacing: "0.1em", marginBottom: 20 }}>
-          ИССЛЕДОВАТЕЛЬСКИЙ ПОРТАЛ
-        </div>
+        <div style={{ fontFamily: "'Cormorant SC', serif", fontSize: "1.2rem", letterSpacing: "0.2em", marginBottom: 8 }}>ЛИТЕРАТУРА</div>
+        <div style={{ fontSize: "0.75rem", color: "rgba(245,239,224,0.5)", letterSpacing: "0.1em", marginBottom: 20 }}>ИССЛЕДОВАТЕЛЬСКИЙ ПРОЕКТ</div>
         <div style={{ width: 40, height: 1, background: "var(--gold)", margin: "0 auto 20px" }} />
         <p style={{ fontSize: "0.8rem", color: "rgba(245,239,224,0.6)", maxWidth: 400, margin: "0 auto" }}>
           Научные материалы, анализ и сравнение семейных образов в русской классической литературе
