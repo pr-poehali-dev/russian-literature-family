@@ -673,10 +673,7 @@ export default function Index() {
             animation: "fadeIn 1s ease 1s forwards",
             opacity: 0,
           }}
-        >
-          ЛИСТАТЬ
-          <div style={{ width: 1, height: 36, background: "var(--gold)" }} />
-        </div>
+        ></div>
       </section>
 
       {/* ── Clans ── */}
